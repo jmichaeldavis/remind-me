@@ -17,6 +17,9 @@
     <nav>
       <button class="btn" id="logout">logout</button>
     </nav>
+        <div class="form-group">
+    <button class="btn btn-primary" id="reminder-btn" >Reminder</button>
+  </div>
     {{/if}}
   </header>
   <main class="container container-fluid mt-5">
@@ -28,6 +31,7 @@
 
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
+  <script src="/js/reminder.js"></script>
   {{/if}}
 </body>
 
