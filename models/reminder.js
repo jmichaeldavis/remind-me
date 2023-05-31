@@ -1,40 +1,57 @@
-const { model, DataTypes } = require("sequelize");
-const sequelize = require("../config/connection");
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-class Reminder extends Model {}
+class Reminder extends Model {} 
 
-Reminder.init({
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.STRING,
-  },
-  date_created: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    defaultValue: DataTypes.NOW,
-  },
-  reminder_start: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  reminder_interval: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: 'user',
-      key: 'id',
+Reminder.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      task_title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      task_description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      task_folder: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      start_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      end_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      task_interval: {
+        type: DataTypes.INTEGER,
+        allowNull: false,  
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'user',
+          key: 'id',
+        },
+      },
     },
-  },
-});
+    {
+      sequelize,
+      timestamps: false,
+      freezeTableName: true,
+      underscored: true,
+      modelName: 'reminder',
+    }
+  );
+  
+  module.exports = Reminder;
+  
