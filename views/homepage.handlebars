@@ -1,10 +1,72 @@
-{{#each users as |user| }}
-<div class="row align-center mb-5">
-  <div class="col-md-6">
-    <h2>{{user.name}}</h2>
-  </div>
-  <div class="col-md-6">
-    <h3><a href="mailto:{{user.email}}">{{user.email}}</a></h3>
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{name}}!</h2>
   </div>
 </div>
-{{/each}}
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <form class="form new-post-form">
+      <div class="form-group">
+        <label for="post-name">Reminder Title:</label>
+        <input class="form-input" type="text" id="post-name" name="post-name" />
+      </div>
+      <div class="form-group">
+        <label for="post-desc">Memo:</label>
+        <textarea class="form-input" id="post-desc" name="post-desc"></textarea>
+      </div>
+
+      {{!-- Recurrance selection --}}
+      <div>
+<input type="checkbox" id="jan" name="jan" value="jan">
+<label for="jan">January</label><br>
+<input type="checkbox" id="feb" name="feb" value="feb">
+<label for="feb">February</label><br>
+<input type="checkbox" id="mar" name="mar" value="mar">
+<label for="mar">March</label><br>
+<input type="checkbox" id="apr" name="apr" value="apr">
+<label for="apr">April</label><br>
+<input type="checkbox" id="may" name="may" value="may">
+<label for="may">May</label><br>
+<input type="checkbox" id="jun" name="jun" value="jun">
+<label for="jun">June</label><br>
+<input type="checkbox" id="jul" name="jul" value="jul">
+<label for="jul">July</label><br>
+<input type="checkbox" id="aug" name="aug" value="aug">
+<label for="aug">August</label><br>
+<input type="checkbox" id="sep" name="sep" value="sep">
+<label for="sep">September</label><br>
+<input type="checkbox" id="oct" name="oct" value="oct">
+<label for="oct">October</label><br>
+<input type="checkbox" id="nov" name="nov" value="nov">
+<label for="nov">November</label><br>
+<input type="checkbox" id="dec" name="dec" value="dec">
+<label for="dec">December</label><br>
+      </div>
+
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Reminder</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if posts.length}}
+  <div class="col-md-6 post-list">
+    <h4 class="text-center">Your Reminders:</h4>
+
+    {{#each posts as |post|}}
+    <div class="row mb-2">
+      <div class="col-md-10">
+        <h5><a href="/post/{{post.id}}">{{post.title}}</a></h5>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="./js/profile.js"></script>
