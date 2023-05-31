@@ -1,0 +1,22 @@
+[
+    {
+      "task_title": "Wash the Dogs",
+      "task_description": "Wash 'em good",
+      "start_date": "2023-06-01",
+      "task_interval": 60
+    },
+    {
+      "task_title": "Change Engine Oil",
+      "task_description": "Oil it up :)",
+      "start_date": "2023-06-07",
+      "task_interval": 90
+    },    
+    {
+      "task_title": "Mow the Lawn",
+      "task_description": "",
+      "start_date": "2023-06-02",
+      "end_date": "2023-10-25",
+      "task_interval": 7
+    }
+  ]
+  
