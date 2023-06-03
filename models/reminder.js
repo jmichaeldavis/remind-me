@@ -19,10 +19,6 @@ Reminder.init(
         type: DataTypes.STRING,
         allowNull: true,
       },
-      task_folder: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       months: {
         type: DataTypes.STRING,
         allowNull: false,

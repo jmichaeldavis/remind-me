@@ -1,5 +1,24 @@
 const nodemailer = require("nodemailer");
 const schedule = require("node-schedule");
+const { Reminder } = require("../models");
+const { User } = require("../models");
+
+
+const scheduleDataRetrieval = async () => {
+  const reminders = await Reminder.findAll();
+  const users = await User.findAll();
+  for (let i = 0; i < reminders.length; i++) {
+    for (let j = 0; j < users.length; j++) {
+      scheduleReminder(
+        users[j].name,
+        users[j].email,
+        reminders[i].task_title,
+        reminders[i].task_description,
+        reminders[i].months
+      );
+    }
+  }
+};
 
 const scheduleReminder = (user, reciever, reminderTitle, description, months) => {
   const transporter = nodemailer.createTransport({
@@ -19,20 +38,21 @@ const scheduleReminder = (user, reciever, reminderTitle, description, months) =>
         From, \n
         Remind Me`,
   };
-
-  const timers = ["0 * * * * *", "30 * * * * *"];
-  for (let i = 0; i < timers.length; i++) {
-    schedule.scheduleJob(timers[i], function () {
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-        console.log("test scheduler");
-      });
+  schedule.scheduleJob(`0,30 * * * ${months} *`, function () {
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+      console.log("test scheduler");
     });
-  }
+  });
 };
 
-module.exports = scheduleReminder;
+module.exports = { scheduleReminder, scheduleDataRetrieval };
+
+
+// console.log("All reminders:", JSON.stringify(reminders, null, 2));
+// console.log("All users:", JSON.stringify(users, null, 2));
+// console.log("SELECTED USER>>>>>", reminders[1].months)

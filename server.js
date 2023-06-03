@@ -4,7 +4,10 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const helpers = require("./utils/helpers");
-
+const schedule = require('./utils/schedule')
+// const { Reminder } = require("./models");
+// const nodemailer = require("nodemailer");
+// const schedule = require("node-schedule");
 
 
 const sequelize = require("./config/connection");
@@ -41,3 +44,16 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
+
+schedule.scheduleDataRetrieval();
+log(schedule.scheduleDataRetrieval)
+
+
+
+
+// const scheduleDataRetrieval = async () => {
+//     const reminders = await Reminder.findAll();
+//     console.log("All reminders:", JSON.stringify(reminders, null, 2));
+// }
+
+// scheduleDataRetrieval();
