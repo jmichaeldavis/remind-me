@@ -1,14 +1,15 @@
-const router = require('express').Router();
-const { Reminder } = require('../../models');
+const router = require("express").Router();
+const { Reminder, User } = require("../../models");
 
 // /api/reminders
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newReminder = await Reminder.create({
       ...req.body,
       user_id: req.session.user_id,
     });
 
+    // scheduleReminder(user, reciever, reminderTitle, description, months);
     res.status(200).json(newReminder);
   } catch (err) {
     res.status(400).json(err);
@@ -16,7 +17,7 @@ router.post('/', async (req, res) => {
 });
 
 // api/reminders - get all reminders
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const reminderData = await Reminder.findAll({
       // where: {
@@ -27,11 +28,11 @@ router.get('/', async (req, res) => {
     res.status(200).json(reminderData);
   } catch (err) {
     res.status(500).json(err);
-  } 
+  }
 });
 
 // /api/reminders/{id}
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const reminderData = await Reminder.findByPk(req.params.id, {
       // where: {
@@ -40,7 +41,7 @@ router.get('/:id', async (req, res) => {
     });
 
     if (!reminderData) {
-      res.status(404).json({ message: 'No reminder found with this id!' });
+      res.status(404).json({ message: "No reminder found with this id!" });
       return;
     }
 
@@ -50,10 +51,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-
 // /api/reminders/{id}
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const reminderData = await Reminder.destroy({
       where: {
@@ -63,7 +62,7 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!reminderData) {
-      res.status(404).json({ message: 'No reminder found with this id!' });
+      res.status(404).json({ message: "No reminder found with this id!" });
       return;
     }
 

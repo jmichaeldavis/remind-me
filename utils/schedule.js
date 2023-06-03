@@ -3,19 +3,39 @@ const schedule = require("node-schedule");
 const { Reminder } = require("../models");
 const { User } = require("../models");
 
+// need to run this function monthly or with each post request
+// const reminders = [];
+// const users = [];
+
+// const updateReminder = async () => {
+//   const reminderData = await Reminder.findAll();
+//   // console.log("REMINDER DATA>>>>", JSON.stringify(reminderData, null, 2))
+//   // reminderData.forEach(reminders.push())
+//   // reminders.push(...reminderData);
+// };
+
+// updateReminder();
+// console.log("REMINDERS>>>>", JSON.stringify(reminders, null, 2))
+
+// const updateUser = async () => {
+//   const userData = await User.findAll();
+//   // users.push(userData);
+// };
 
 const scheduleDataRetrieval = async () => {
   const reminders = await Reminder.findAll();
   const users = await User.findAll();
-  for (let i = 0; i < reminders.length; i++) {
-    for (let j = 0; j < users.length; j++) {
-      scheduleReminder(
-        users[j].name,
-        users[j].email,
-        reminders[i].task_title,
-        reminders[i].task_description,
-        reminders[i].months
-      );
+  for (let i = 0; i < users.length; i++) {
+    for (let j = 0; j < reminders.length; j++) {
+      if (users[i].id === reminders[j].user_id) {
+        scheduleReminder(
+          users[i].name,
+          users[i].email,
+          reminders[j].task_title,
+          reminders[j].task_description,
+          reminders[j].months
+        );
+      }
     }
   }
 };
@@ -50,9 +70,4 @@ const scheduleReminder = (user, reciever, reminderTitle, description, months) =>
   });
 };
 
-module.exports = { scheduleReminder, scheduleDataRetrieval };
-
-
-// console.log("All reminders:", JSON.stringify(reminders, null, 2));
-// console.log("All users:", JSON.stringify(users, null, 2));
-// console.log("SELECTED USER>>>>>", reminders[1].months)
+module.exports = scheduleDataRetrieval;
