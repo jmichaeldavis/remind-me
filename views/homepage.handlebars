@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
+    <h2>Welcome, {{email}}!</h2>
   </div>
 </div>
 
@@ -17,45 +17,45 @@
       </div>
 
       {{!-- Recurrance selection --}}
-      <div>
-<input type="checkbox" id="jan" name="jan" value="jan">
+      <div class="months" id="months">
+<input type="checkbox" id="jan" name="jan" value="0">
 <label for="jan">January</label><br>
-<input type="checkbox" id="feb" name="feb" value="feb">
+<input type="checkbox" id="feb" name="feb" value="1">
 <label for="feb">February</label><br>
-<input type="checkbox" id="mar" name="mar" value="mar">
+<input type="checkbox" id="mar" name="mar" value="2">
 <label for="mar">March</label><br>
-<input type="checkbox" id="apr" name="apr" value="apr">
+<input type="checkbox" id="apr" name="apr" value="3">
 <label for="apr">April</label><br>
-<input type="checkbox" id="may" name="may" value="may">
+<input type="checkbox" id="may" name="may" value="4">
 <label for="may">May</label><br>
-<input type="checkbox" id="jun" name="jun" value="jun">
+<input type="checkbox" id="jun" name="jun" value="5">
 <label for="jun">June</label><br>
-<input type="checkbox" id="jul" name="jul" value="jul">
+<input type="checkbox" id="jul" name="jul" value="6">
 <label for="jul">July</label><br>
-<input type="checkbox" id="aug" name="aug" value="aug">
+<input type="checkbox" id="aug" name="aug" value="7">
 <label for="aug">August</label><br>
-<input type="checkbox" id="sep" name="sep" value="sep">
+<input type="checkbox" id="sep" name="sep" value="8">
 <label for="sep">September</label><br>
-<input type="checkbox" id="oct" name="oct" value="oct">
+<input type="checkbox" id="oct" name="oct" value="9">
 <label for="oct">October</label><br>
-<input type="checkbox" id="nov" name="nov" value="nov">
+<input type="checkbox" id="nov" name="nov" value="10">
 <label for="nov">November</label><br>
-<input type="checkbox" id="dec" name="dec" value="dec">
+<input type="checkbox" id="dec" name="dec" value="11">
 <label for="dec">December</label><br>
-      </div>
-
-
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create Reminder</button>
+        <button type="submit" id="create-reminder" class="btn btn-primary">Create Reminder</button>
       </div>
+      </div>
+
+
     </form>
   </div>
 
-  {{#if posts.length}}
+  {{#if reminders.length}}
   <div class="col-md-6 post-list">
     <h4 class="text-center">Your Reminders:</h4>
 
-    {{#each posts as |post|}}
+    {{#each reminder as |reminder|}}
     <div class="row mb-2">
       <div class="col-md-10">
         <h5><a href="/post/{{post.id}}">{{post.title}}</a></h5>
@@ -69,4 +69,5 @@
   {{/if}}
 </div>
 
-<script src="./js/profile.js"></script>
+
+<script src="/js/profile.js"></script>
