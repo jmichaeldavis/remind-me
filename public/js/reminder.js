@@ -10,7 +10,7 @@ function getSelectedCheckboxes() {
     });
     const reminderTitle = document.getElementById("post-name").value.trim();
     const reminderBody = document.getElementById("post-desc").value.trim();
-    const monthString = `0 0 8 1 ${selectedCheckboxes} *`
+    const monthString = `${selectedCheckboxes}`
 
     const reminderData = {
         task_title: reminderTitle,
