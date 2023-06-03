@@ -1,4 +1,5 @@
 const createReminder = document.getElementById("create-reminder");
+const newReminderBtn = document.getElementById("addReminder")
 
 function getSelectedCheckboxes() {
     event.preventDefault();
@@ -49,3 +50,5 @@ function openForm() {
 function closeForm() {
     document.getElementById("myReminder").style.display = "none";
 }
+
+newReminderBtn.addEventListener("click", openForm)
