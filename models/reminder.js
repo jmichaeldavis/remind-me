@@ -23,9 +23,18 @@ Reminder.init(
         type: DataTypes.STRING,
         allowNull: true,
       },
-      months: {
-        type: DataTypes.STRING,
+      start_date: {
+        type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: DataTypes.NOW,
+      },
+      end_date: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      task_interval: {
+        type: DataTypes.INTEGER,
+        allowNull: false,  
       },
       user_id: {
         type: DataTypes.INTEGER,
