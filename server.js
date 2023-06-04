@@ -4,7 +4,7 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
 const helpers = require("./utils/helpers");
-const scheduleDataRetrieval = require("./utils/schedule");
+// const scheduleDataRetrieval = require("./utils/schedule");
 
 const sequelize = require("./config/connection");
 const { log } = require("console");
@@ -41,4 +41,4 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
 
-scheduleDataRetrieval();
+// scheduleDataRetrieval();
