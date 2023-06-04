@@ -1,8 +1,7 @@
-{
+    {
         box-sizing: border-box;
     }
 
-    /* Button used to open the contact form - fixed at the bottom of the page */
     .open-button {
         background-color: #555;
         color: white;
@@ -13,44 +12,40 @@
         position: fixed;
         bottom: 23px;
         right: 28px;
-        width: 280px;
+        width: 300px;
     }
 
-    /* The popup form - hidden by default */
     .reminder-popup {
         display: none;
         position: fixed;
         bottom: 0;
         right: 15px;
-        border: 3px solid #f1f1f1;
+        border: 10px solid #f1f1f1;
         z-index: 9;
     }
 
-    /* Add styles to the form container */
     .reminder-container {
-        max-width: 300px;
+        width: 300px;
         padding: 10px;
         background-color: white;
     }
 
-    /* Full-width input fields */
-    .reminder-container input[type=text],
-    .reminder-container input[type=password] {
+    .reminder-container input[type=form-input],
+    .reminder-container input[type=form-input] {
         width: 100%;
-        padding: 15px;
+        display: block;
+        padding: 20px;
         margin: 5px 0 22px 0;
         border: none;
         background: #f1f1f1;
     }
 
-    /* When the inputs get focus, do something */
-    .reminder-container input[type=text]:focus,
-    .reminder-container input[type=password]:focus {
+    .reminder-container input[type=form-input]:focus,
+    .reminder-container input[type=form-input]:focus {
         background-color: #ddd;
         outline: none;
     }
 
-    /* Set a style for the submit/login button */
     .reminder-container .btn {
         background-color: #04AA6D;
         color: white;
@@ -62,13 +57,18 @@
         opacity: 0.8;
     }
 
-    /* Add a red background color to the cancel button */
-    .reminder-container .cancel {
-        background-color: red;
-    }
-
-    /* Add some hover effects to buttons */
     .reminder-container .btn:hover,
     .open-button:hover {
         opacity: 1;
+    }
+
+
+    /* main css */
+
+    body {
+        font-family: 'Inter Tight', sans-serif;
+    }
+
+    h1 {
+        font-size: 100px;
     }
