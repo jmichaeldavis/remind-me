@@ -4,7 +4,7 @@ const withAuth = require('../utils/auth');
 
 // Prevent non logged in users from viewing the homepage
 router.get('/', 
-// withAuth, 
+withAuth, 
 async (req, res) => {
   try {
     const dbReminderData = await Reminder.findAll({
