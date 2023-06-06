@@ -1,15 +1,17 @@
 {{#if loggedIn}}
-<button onclick="location.href = 'http://localhost:3001'" class=" btn return-btn">Return</button>
+<button onclick="location.href = 'http://localhost:3001'" class="btn return-btn">Return</button>
 <section class="single-reminder">
     <div class="painting-details">
         <h3>{{reminder.task_title}}</h3>
         <p class="single-reminder-description">{{reminder.task_description}}</p>
     </div>
     <div>
-        <button class="btn">Edit</button>
-        <button data-id="{{reminder.id}}" id="delete-btn" class="btn btn-danger">Delete</button>
+        <button class="delete-btn btn btn-danger" data-id="{{reminder.id}}">Delete</button>
     </div>
 </section>
 {{else}}
 <a href="/login">You must login first to view this page</a>
 {{/if}}
+
+{{!-- <script src="/js/reminder.js"></script> --}}
+<script src="/js/singleReminder.js"></script>
