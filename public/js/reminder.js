@@ -26,18 +26,32 @@ function getSelectedCheckboxes() {
     body: JSON.stringify(reminderData),
   })
     .then((response) => {
+      document.location.replace("/");
       console.log(response);
-      // response.json())
     })
     .catch((error) => {
       console.error("Error:", error);
     });
   console.log(reminderData);
-  // console.log(selectedCheckboxes);
-  // console.log(monthString);
   return;
 }
 
-// TEMP= "0 0 8 1 `${monthsSelected}` *"
+const delButtonHandler = async (event) => {
+  if (event.target.hasAttribute("data-id")) {
+    const id = event.target.getAttribute("data-id");
+
+    const response = await fetch(`/api/reminders/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      document.location.replace("/");
+    } else {
+      alert("Failed to delete reminder");
+    }
+  }
+};
 
 createReminder.addEventListener("click", getSelectedCheckboxes);
+
+document.querySelector(".reminder-list").addEventListener("click", delButtonHandler);

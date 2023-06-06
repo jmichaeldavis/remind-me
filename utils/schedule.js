@@ -132,7 +132,7 @@ const scheduleReminder = (user, reciever, reminderTitle, description, months,rem
         From, \n
         Remind Me`,
   };
-  schedule.scheduleJob(`0,30 * * * ${months} *`, async function () {
+  schedule.scheduleJob(`0 8 1 ${months} *`, async function () {
     const reminder = await Reminder.findOne({where: {id: reminders.id}})
     if (!reminder.is_sent) {
     transporter.sendMail(mailOptions, async function (error, info) {
