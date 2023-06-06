@@ -34,6 +34,7 @@ router.get('/',
   });
 
 router.get('/reminder/:id', async (req, res) => {
+
   try {
     const dbOneReminderData = await Reminder.findOne({
       where: {
@@ -64,6 +65,16 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('signup');
 });
 
 module.exports = router;

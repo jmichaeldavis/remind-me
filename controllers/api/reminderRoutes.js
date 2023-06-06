@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Reminder, User } = require("../../models");
+const eventEmitter = require("../../utils/eventEmitter");
 
 // /api/reminders
 router.post("/", async (req, res) => {
@@ -8,8 +9,9 @@ router.post("/", async (req, res) => {
       ...req.body,
       user_id: req.session.user_id,
     });
-
+    
     // scheduleReminder(user, reciever, reminderTitle, description, months);
+    eventEmitter.emit('newReminderAdded')
     res.status(200).json(newReminder);
   } catch (err) {
     res.status(400).json(err);

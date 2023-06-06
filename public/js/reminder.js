@@ -10,48 +10,59 @@ const closeReminderBtn = document.getElementById("closeButton");
 //     }
 // };
 
-function getSelectedCheckboxes(event) {
-    event.preventDefault();
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    const selectedCheckboxes = [];
-    closeForm()
-    checkboxes.forEach(function (checkbox) {
-        selectedCheckboxes.push(checkbox.value);
-    });
-    const reminderTitle = document.getElementById("post-name").value.trim();
-    const reminderBody = document.getElementById("post-desc").value.trim();
-    const monthString = `${selectedCheckboxes}`;
+function getSelectedCheckboxes() {
+  event.preventDefault();
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+  const selectedCheckboxes = [];
+  closeForm()
+  checkboxes.forEach(function (checkbox) {
+    selectedCheckboxes.push(checkbox.value);
+  });
+  const reminderTitle = document.getElementById("post-name").value.trim();
+  const reminderBody = document.getElementById("post-desc").value.trim();
+  const monthString = `${selectedCheckboxes}`;
 
-    const reminderData = {
-        task_title: reminderTitle,
-        task_description: reminderBody,
-        months: monthString,
-    };
+  const reminderData = {
+    task_title: reminderTitle,
+    task_description: reminderBody,
+    months: monthString,
+  };
 
-    fetch("/api/reminders", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reminderData),
+  fetch("/api/reminders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(reminderData),
+  })
+    .then((response) => {
+      document.location.replace("/");
+      console.log(response);
     })
-        .then((response) => {
-            console.log(response);
-            // response.json())
-
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
-    console.log(reminderData);
-    // console.log(selectedCheckboxes);
-    // console.log(monthString);
-    showNewReminderBtn();
-    window.location.reload();
-    return;
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+  console.log(reminderData);
+  showNewReminderBtn();
+  window.location.reload();
+  return;
 }
 
-// TEMP= "0 0 8 1 `${monthsSelected}` *"
+const delButtonHandler = async (event) => {
+  if (event.target.hasAttribute("data-id")) {
+    const id = event.target.getAttribute("data-id");
+
+    const response = await fetch(`/api/reminders/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      document.location.replace("/");
+    } else {
+      alert("Failed to delete reminder");
+    }
+  }
+};
 
 function hideNewReminderBtn() {
     newReminderBtn.style.display = "none"
@@ -101,3 +112,4 @@ newReminderBtn.addEventListener("click", openForm);
 closeReminderBtn.addEventListener("click", closeForm);
 
 // deleteBtn.addEventListener("click", deleteReminder);
+document.querySelector(".reminder-list").addEventListener("click", delButtonHandler);
