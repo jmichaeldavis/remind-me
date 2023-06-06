@@ -1,10 +1,11 @@
 <div class="row">
-  <div class="col-auto">
-    <h2>Welcome!</h2>
+  <div class="text-center col-auto">
+    <h2>Welcome, {{user_name}}!</h2>
+    <h4 id="your-reminders" class="text-center">Your Reminders</h4>
   </div>
 </div>
 
-<div class="row mt-4">
+{{!-- <div class="row mt-4">
   <div class="col-md-6">
     <form class="form new-post-form">
       <div class="form-group">
@@ -12,62 +13,74 @@
         <input class="form-input" type="text" id="post-name" name="post-name" />
       </div>
       <div class="form-group">
-        <label for="post-desc">Memo:</label>
+        <label>Memo:</label>
         <textarea class="form-input" id="post-desc" name="post-desc"></textarea>
+      </div> --}}
+
+      {{!-- carlys new input --}}
+      <button id="addReminder" class="btn open-button">+</button>
+      <div>
+        <!-- The form -->
+        <div class="reminder-popup" id="myReminder">
+          <form class="reminder-container">
+            <label><b>New Reminder:</b></label>
+            <input type="form-input" id="post-name" required>
+
+            <label><b>Description:</b></label>
+            <input type="form-input" id="post-desc" required>
+
+            {{!-- Recurrance selection --}}
+            <div class="months" id="months">
+              <input type="checkbox" id="jan" name="jan" value="1">
+              <label for="jan">January</label><br>
+              <input type="checkbox" id="feb" name="feb" value="2">
+              <label for="feb">February</label><br>
+              <input type="checkbox" id="mar" name="mar" value="3">
+              <label for="mar">March</label><br>
+              <input type="checkbox" id="apr" name="apr" value="4">
+              <label for="apr">April</label><br>
+              <input type="checkbox" id="may" name="may" value="5">
+              <label for="may">May</label><br>
+              <input type="checkbox" id="jun" name="jun" value="6">
+              <label for="jun">June</label><br>
+              <input type="checkbox" id="jul" name="jul" value="7">
+              <label for="jul">July</label><br>
+              <input type="checkbox" id="aug" name="aug" value="8">
+              <label for="aug">August</label><br>
+              <input type="checkbox" id="sep" name="sep" value="9">
+              <label for="sep">September</label><br>
+              <input type="checkbox" id="oct" name="oct" value="10">
+              <label for="oct">October</label><br>
+              <input type="checkbox" id="nov" name="nov" value="11">
+              <label for="nov">November</label><br>
+              <input type="checkbox" id="dec" name="dec" value="12">
+              <label for="dec">December</label><br>
+              <div class="form-group">
+                <button type="submit" id="create-reminder" class="btn btn-primary">Create Reminder</button>
+                <button type="submit" id="closeButton" class="btn btn-danger">Close</button>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+
+        {{#if reminders.length}}
+        <div class="reminder-card-container">
+
+          {{#each reminders as |reminders|}}
+          <a class="reminder-card" href="/reminder/{{id}}">
+            <div class=" reminder-title">
+              <h5 class="reminder-title">{{reminders.task_title}}</h5>
+            </div>
+            {{!-- <div class="col-md-2">
+              <button class="btn btn-sm btn-danger" data-id="{{reminders.id}}">DELETE</button>
+            </div> --}}
+          </a>
+          {{/each}}
+        </div>
+        {{/if}}
       </div>
 
-      {{!-- Recurrance selection --}}
-      <div class="months" id="months">
-<input type="checkbox" id="jan" name="jan" value="1">
-<label for="jan">January</label><br>
-<input type="checkbox" id="feb" name="feb" value="2">
-<label for="feb">February</label><br>
-<input type="checkbox" id="mar" name="mar" value="3">
-<label for="mar">March</label><br>
-<input type="checkbox" id="apr" name="apr" value="4">
-<label for="apr">April</label><br>
-<input type="checkbox" id="may" name="may" value="5">
-<label for="may">May</label><br>
-<input type="checkbox" id="jun" name="jun" value="6">
-<label for="jun">June</label><br>
-<input type="checkbox" id="jul" name="jul" value="7">
-<label for="jul">July</label><br>
-<input type="checkbox" id="aug" name="aug" value="8">
-<label for="aug">August</label><br>
-<input type="checkbox" id="sep" name="sep" value="9">
-<label for="sep">September</label><br>
-<input type="checkbox" id="oct" name="oct" value="10">
-<label for="oct">October</label><br>
-<input type="checkbox" id="nov" name="nov" value="11">
-<label for="nov">November</label><br>
-<input type="checkbox" id="dec" name="dec" value="12">
-<label for="dec">December</label><br>
-      <div class="form-group">
-        <button type="submit" id="create-reminder" class="btn btn-primary">Create Reminder</button>
-      </div>
-      </div>
-
-
-    </form>
-  </div>
-
-  {{#if reminders.length}}
-  <div class="col-md-6 reminder-list">
-    <h4 class="text-center">Your Reminders:</h4>
-
-    {{#each reminders as |reminder|}}
-    <div class="row mb-2">
-      <div class="col-md-10">
-        <h5>{{reminder.task_title}}</h5>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-sm btn-danger" data-id="{{reminder.id}}">DELETE</button>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/if}}
-</div>
 
 <script src="/js/reminder.js"></script>
-

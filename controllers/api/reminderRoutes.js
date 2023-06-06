@@ -59,7 +59,7 @@ router.delete("/:id", async (req, res) => {
     const reminderData = await Reminder.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.user_id,
+        // user_id: req.session.user_id,
       },
     });
 
@@ -67,7 +67,7 @@ router.delete("/:id", async (req, res) => {
       res.status(404).json({ message: "No reminder found with this id!" });
       return;
     }
-
+    res.redirect('/');
     res.status(200).json(reminderData);
   } catch (err) {
     res.status(500).json(err);

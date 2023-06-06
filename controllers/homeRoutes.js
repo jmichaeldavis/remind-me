@@ -1,27 +1,58 @@
 const router = require('express').Router();
-const { Reminder } = require('../models');
+const { Reminder, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Prevent non logged in users from viewing the homepage
-router.get('/', 
-withAuth, 
-async (req, res) => {
+router.get('/',
+  // withAuth,
+  async (req, res) => {
+    try {
+      const dbReminderData = await Reminder.findAll({
+        where: {
+          user_id: req.session.user_id
+        },
+        include: [
+          {
+            model: User,
+            attributes: ['name', 'email'],
+          },
+        ],
+      });
+
+      const reminders = dbReminderData.map((reminder) =>
+        reminder.get({ plain: true }))
+
+      res.render('homepage', {
+        reminders,
+        user_name: req.session.user_name,
+        // Pass the logged in flag to the template
+        logged_in: req.session.logged_in,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
+router.get('/reminder/:id', async (req, res) => {
+
   try {
-    const dbReminderData = await Reminder.findAll({
+    const dbOneReminderData = await Reminder.findOne({
       where: {
-        user_id: req.session.user_id
-      }  
+        user_id: req.session.user_id,
+        id: req.params.id
+      }
     });
 
-    const reminders = dbReminderData.map((reminder) =>
-    reminder.get({ plain: true }))
+    if (!dbOneReminderData) {
+      // render homescreen if reminder is not found
+    }
 
-    res.render('homepage', {
-      reminders,
-      // Pass the logged in flag to the template
-      logged_in: req.session.logged_in,
-    });
+    console.log(req.session);
+    const reminder = dbOneReminderData.get({ plain: true })
+    console.log(reminder);
+    res.render('reminder', { reminder, loggedIn: req.session.logged_in });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
