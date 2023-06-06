@@ -14,7 +14,7 @@ function getSelectedCheckboxes() {
   event.preventDefault();
   const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
   const selectedCheckboxes = [];
-  closeForm()
+  closeForm();
   checkboxes.forEach(function (checkbox) {
     selectedCheckboxes.push(checkbox.value);
   });
@@ -48,68 +48,70 @@ function getSelectedCheckboxes() {
   return;
 }
 
-const delButtonHandler = async (event) => {
-  if (event.target.hasAttribute("data-id")) {
-    const id = event.target.getAttribute("data-id");
-
-    const response = await fetch(`/api/reminders/${id}`, {
-      method: "DELETE",
-    });
-
-    if (response.ok) {
-      document.location.replace("/");
-    } else {
-      alert("Failed to delete reminder");
-    }
-  }
-};
 
 function hideNewReminderBtn() {
-    newReminderBtn.style.display = "none"
+  newReminderBtn.style.display = "none";
 }
 
 function showNewReminderBtn() {
-    newReminderBtn.style.display = "block"
+  newReminderBtn.style.display = "block";
 }
 
 function openForm() {
-    document.getElementById("myReminder").style.display = "block";
-    hideNewReminderBtn();
+  document.getElementById("myReminder").style.display = "block";
+  hideNewReminderBtn();
 }
 
 function closeForm() {
-    document.getElementById("myReminder").style.display = "none";
-    showNewReminderBtn();
+  document.getElementById("myReminder").style.display = "none";
+  showNewReminderBtn();
 }
 
 function returnHomePage() {
-    console.log('this is working');
-    document.location.replace('/');
+  console.log("this is working");
+  document.location.replace("/");
 }
 
 const deleteReminder = function () {
-    // fetch(`/api/reminders/${reminderId}`, {
+  // fetch(`/api/reminders/${reminderId}`, {
     //     method: "DELETE",
     // })
     //     .then((response) => {
-    //         console.log(response);
-    //         // response.json())
+      //         console.log(response);
+      //         // response.json())
+      
+      //     })
+      //     .catch((error) => {
+        //         console.error("Error:", error);
+        //     });
+        
+        // returnHomePage();
+        // return;
+        console.log("test");
+      };
 
-    //     })
-    //     .catch((error) => {
-    //         console.error("Error:", error);
-    //     });
-
-    // returnHomePage();
-    // return;
-    console.log("test")
-}
-
-createReminder.addEventListener("click", getSelectedCheckboxes);
-
-newReminderBtn.addEventListener("click", openForm);
-
-closeReminderBtn.addEventListener("click", closeForm);
-
-// deleteBtn.addEventListener("click", deleteReminder);
-document.querySelector(".reminder-list").addEventListener("click", delButtonHandler);
+      const delButtonHandler = async (event) => {
+        if (event.target.hasAttribute("data-id")) {
+          const id = event.target.getAttribute("data-id");
+      
+          const response = await fetch(`/api/reminders/${id}`, {
+            method: "DELETE",
+          });
+      
+          if (response.ok) {
+            document.location.replace("/");
+          } else {
+            alert("Failed to delete reminder");
+          }
+        }
+      };
+      
+      createReminder.addEventListener("click", getSelectedCheckboxes);
+      
+      newReminderBtn.addEventListener("click", openForm);
+      
+      closeReminderBtn.addEventListener("click", closeForm);
+      
+      // deleteBtn.addEventListener("click", deleteReminder);
+      // document.querySelector(".delete-btn").addEventListener("click", delButtonHandler);
+      
