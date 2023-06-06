@@ -19,6 +19,7 @@
     </h1>
     {{#if logged_in}}
     <nav>
+      <p id="reminder-count">Total reminders: {{reminders.length}}</p>
       <button class="btn align-right" id="logout">logout</button>
     </nav>
     <div class="form-group">

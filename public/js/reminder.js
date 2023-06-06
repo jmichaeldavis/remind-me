@@ -1,12 +1,20 @@
 const createReminder = document.getElementById("create-reminder");
 const newReminderBtn = document.getElementById("addReminder");
 const closeReminderBtn = document.getElementById("closeButton");
+// const deleteBtn = document.getElementById("delete-btn");
+// const reminderId = deleteBtn.getAttribute('data-id');
+// const addDeleteEvent = function (button) {
+//     for (var i = 0; i < button.length; i++) {
+//         button[i].addEventListener('click', deleteReminder,
+//         )
+//     }
+// };
 
-function getSelectedCheckboxes() {
+function getSelectedCheckboxes(event) {
     event.preventDefault();
     const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     const selectedCheckboxes = [];
-
+    closeForm()
     checkboxes.forEach(function (checkbox) {
         selectedCheckboxes.push(checkbox.value);
     });
@@ -30,6 +38,7 @@ function getSelectedCheckboxes() {
         .then((response) => {
             console.log(response);
             // response.json())
+
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -37,21 +46,58 @@ function getSelectedCheckboxes() {
     console.log(reminderData);
     // console.log(selectedCheckboxes);
     // console.log(monthString);
+    showNewReminderBtn();
+    window.location.reload();
     return;
 }
 
 // TEMP= "0 0 8 1 `${monthsSelected}` *"
 
-createReminder.addEventListener("click", getSelectedCheckboxes);
+function hideNewReminderBtn() {
+    newReminderBtn.style.display = "none"
+}
+
+function showNewReminderBtn() {
+    newReminderBtn.style.display = "block"
+}
 
 function openForm() {
     document.getElementById("myReminder").style.display = "block";
+    hideNewReminderBtn();
 }
 
 function closeForm() {
     document.getElementById("myReminder").style.display = "none";
+    showNewReminderBtn();
 }
 
-newReminderBtn.addEventListener("click", openForm)
+function returnHomePage() {
+    console.log('this is working');
+    document.location.replace('/');
+}
 
-closeReminderBtn.addEventListener("click", closeForm)  
+const deleteReminder = function () {
+    // fetch(`/api/reminders/${reminderId}`, {
+    //     method: "DELETE",
+    // })
+    //     .then((response) => {
+    //         console.log(response);
+    //         // response.json())
+
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error:", error);
+    //     });
+
+    // returnHomePage();
+    // return;
+    console.log("test")
+}
+
+createReminder.addEventListener("click", getSelectedCheckboxes);
+
+newReminderBtn.addEventListener("click", openForm);
+
+closeReminderBtn.addEventListener("click", closeForm);
+
+// deleteBtn.addEventListener("click", deleteReminder);
