@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
+    <h2>Welcome!</h2>
   </div>
 </div>
 
@@ -52,20 +52,22 @@
   </div>
 
   {{#if reminders.length}}
-  <div class="col-md-6 post-list">
+  <div class="col-md-6 reminder-list">
     <h4 class="text-center">Your Reminders:</h4>
 
-    {{#each reminder as |reminder|}}
+    {{#each reminders as |reminder|}}
     <div class="row mb-2">
       <div class="col-md-10">
-        <h5><a href="/post/{{post.id}}">{{post.title}}</a></h5>
+        <h5>{{reminder.task_title}}</h5>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger" data-id="{{reminder.id}}">DELETE</button>
       </div>
     </div>
     {{/each}}
   </div>
   {{/if}}
 </div>
+
+<script src="/js/reminder.js"></script>
 
