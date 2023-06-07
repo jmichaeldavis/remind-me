@@ -56,8 +56,7 @@ const scheduleReminder = (
     from: "remind.me.later.date@gmail.com",
     to: reciever,
     subject: reminderTitle,
-    text: 
-`Hello ${user}, here's your personal reminder.\n 
+    text: `Hello ${user}, here's your personal reminder.\n 
   Reminder:
     ${reminderTitle}\n
   Details:
@@ -67,10 +66,9 @@ Remind Me\n
 To modify your reminders visit www.remind_me.com`,
   };
 
-
   schedule.scheduleJob(`0,30 * * * ${months} *`, async function () {
     const reminder = await Reminder.findOne({ where: { id: reminders.id } });
-    if (!reminder.is_sent) {
+    if (reminder && !reminder.is_sent) {
       transporter.sendMail(mailOptions, async function (error, info) {
         if (error) {
           console.log(error);
