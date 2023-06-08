@@ -6,7 +6,6 @@ const routes = require("./controllers");
 const helpers = require("./utils/helpers");
 const eventEmitter = require("./utils/eventEmitter");
 const scheduleDataRetrieval = require("./utils/schedule");
-const seedDatabase = require("./seeds/seed");
 
 const sequelize = require("./config/connection");
 const { log } = require("console");
@@ -40,8 +39,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 eventEmitter.on("newReminderAdded", scheduleDataRetrieval);
 scheduleDataRetrieval();
-
-seedDatabase();
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
