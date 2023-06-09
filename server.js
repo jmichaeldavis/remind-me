@@ -40,6 +40,6 @@ app.use(routes);
 eventEmitter.on("newReminderAdded", scheduleDataRetrieval);
 scheduleDataRetrieval();
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
