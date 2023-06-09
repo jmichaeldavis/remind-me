@@ -22,4 +22,4 @@ const seedDatabase = async () => {
   process.exit(0);
 };
 
-module.exports = seedDatabase
+seedDatabase();

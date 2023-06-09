@@ -63,7 +63,7 @@ const scheduleReminder = (
     ${description} \n
 From,
 Remind Me\n
-To modify your reminders visit www.remind_me.com`,
+To modify your reminders visit https://monthlyreminders.herokuapp.com/`,
   };
 
   schedule.scheduleJob(`0,30 * * * ${months} *`, async function () {

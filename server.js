@@ -2,16 +2,14 @@ const path = require("path");
 const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const routes = require("./controllers");
+const sequelize = require("./config/connection");
 const helpers = require("./utils/helpers");
 const eventEmitter = require("./utils/eventEmitter");
 const scheduleDataRetrieval = require("./utils/schedule");
-const seedDatabase = require("./seeds/seed");
 
-const sequelize = require("./config/connection");
-const { log } = require("console");
 
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -40,8 +38,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(routes);
 eventEmitter.on("newReminderAdded", scheduleDataRetrieval);
 scheduleDataRetrieval();
-
-seedDatabase();
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
