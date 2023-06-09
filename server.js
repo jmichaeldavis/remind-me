@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
-// eventEmitter.on("newReminderAdded", scheduleDataRetrieval);
+eventEmitter.on("newReminderAdded", scheduleDataRetrieval);
 scheduleDataRetrieval();
 
 sequelize.sync({ force: false }).then(() => {
